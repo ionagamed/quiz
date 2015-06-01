@@ -16,15 +16,15 @@ Main* Main::getInstance() {
 void Main::init(std::string filename) {
 	conf.init(filename);
 
-	//window = new sf::RenderWindow(
-			//sf::VideoMode::getDesktopMode(),
-			//"quiz",
-			//sf::Style::Fullscreen
-			//);
 	window = new sf::RenderWindow(
-			sf::VideoMode(800, 640),
-			"quiz"
+			sf::VideoMode::getDesktopMode(),
+			"quiz",
+			sf::Style::Fullscreen
 			);
+	//window = new sf::RenderWindow(
+			//sf::VideoMode(800, 640),
+			//"quiz"
+			//);
 	window->setFramerateLimit(60);
 
 	// Anyway, doesn't work with ctrl-alt-f# tty switches
