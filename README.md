@@ -1,4 +1,2 @@
 Usage:
-quiz [-d] <conf.py>
-
-
+quiz [-d] &lt;conf.py&gt;
