@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.6)
 project(quiz)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/Modules)
-set(EXECUTABLE_OUTPUT_PATH build)
+set(EXECUTABLE_OUTPUT_PATH bin)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	set(CMAKE_CXX_FLAGS "-O2 -std=c++11 -g")

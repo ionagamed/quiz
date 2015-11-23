@@ -9,6 +9,7 @@ Question::Question(std::string que, std::string ans, std::function <bool(std::st
 
 	text.setFont(Main::getInstance()->font);
 	text.setColor(sf::Color::Black);
+	showTheThing = true;
 }
 
 void Question::draw(int pos) {
