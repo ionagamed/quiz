@@ -3,7 +3,8 @@ import correct, random
 
 conf =	{
 	"colorStep": 0.08,
-	"font": "/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf"
+	"font": "/usr/share/fonts/truetype/freefont/FreeMonoBold.ttf",
+	"title": "Уникальный шанс узнать больше столиц!\nПроверим перевод строки"
 }
 
 def checker(ans, inp):

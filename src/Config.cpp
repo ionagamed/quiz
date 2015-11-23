@@ -35,6 +35,7 @@ void Config::init(std::string filename) {
 
     settings.colorStep = PyFloat_AsDouble(PyDict_GetItemString(confDict, "colorStep"));
     settings.fontName = PyString_AsString(PyDict_GetItemString(confDict, "font")); 
+	settings.title = PyString_AsString(PyDict_GetItemString(confDict, "title"));
 
     PyObject* mainFunc = PyDict_GetItemString(mainDict, "main");
     PyObject* result = PyObject_CallObject(mainFunc, NULL);

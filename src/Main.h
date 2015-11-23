@@ -19,11 +19,10 @@ public:
 	// For smooth bg color switch
 	double bgr, bgg, bgb;
 
+	sf::Text title;
+
 	Config conf;
 	int currentPointer;
-
-	std::string currentInputLocale;
-	bool altPressed, shiftPressed;
 
 	bool debug;
 

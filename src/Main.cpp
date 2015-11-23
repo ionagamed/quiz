@@ -5,6 +5,8 @@
 
 #include <X11/Xlib.h>
 
+#include "utf8.h"
+
 Main* Main::getInstance() {
 	static Main* instance = NULL;
 	if (instance) {
@@ -34,9 +36,13 @@ void Main::init(std::string filename) {
 	font.loadFromFile(conf.settings.fontName);
 	msgText.setFont(font);
 
+	title.setFont(font);
+	title.setString(sf::toUtf32(conf.settings.title));
+	title.setPosition(sf::Vector2f(sf::VideoMode::getDesktopMode().width / 2, 100));
+	title.setCharacterSize(24);
+	title.setColor(sf::Color::Black);
+
 	currentPointer = 0;
-	currentInputLocale = "ru";
-	altPressed = shiftPressed = false;
 
 	bgr = bgg = bgb = 255.0;
 }
@@ -46,6 +52,7 @@ void Main::draw() {
 		// Calculate the position relative to the currentPointer
 		conf.questions[i]->draw(i - currentPointer);
 	}
+	window->draw(title);
 }
 
 void Main::loop(sf::Time dt) {
@@ -56,20 +63,6 @@ void Main::loop(sf::Time dt) {
 	if (currentPointer >= (int) conf.questions.size()) {
 		exit();
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) &&
-		sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt) &&
-		!(shiftPressed && altPressed)) {
-		if (currentInputLocale == "en_US") {
-			currentInputLocale = "ru";
-		} else {
-			currentInputLocale = "en_US";
-		}
-		system(("setxkbmap " + currentInputLocale).c_str());
-	}
-
-	shiftPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LShift);
-	altPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt);
 
 	if (sf::Color(bgr, bgg, bgb) != sf::Color::White) {
 		bgr += (sf::Color::White.r - bgr) * conf.settings.colorStep;
@@ -148,7 +141,6 @@ void Main::handle(sf::Event ev) {
 
 void Main::exit() {
 	window->close();
-	system("setxkbmap en_US");
 }
 
 int main(int argc, char** argv) {
@@ -157,8 +149,6 @@ int main(int argc, char** argv) {
 		std::cout << usage;
 		return 1;
 	}
-	// FIXME: For some unknown reason language switch won't work
-	system("setxkbmap ru");
 	if (argc > 2) {
 		if (std::string(argv[1]) != "-d") {
 			std::cout << usage;

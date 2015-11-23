@@ -9,6 +9,7 @@ struct Settings {
 	double colorStep;
 	std::string fontName;
 	bool numerateQuestions;
+	std::string title;
 };
 
 #endif // SETTINGS_H
